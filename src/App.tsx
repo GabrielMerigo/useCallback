@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useState } from 'react';
 
 function App() {
+  const [num, setNum] = useState<number>(1);
+
+  const dispatchLog = useCallback(() => {
+    console.log('log dispatched');
+  }, [])
+
+  useEffect(() => {
+    console.log('função dispatch log renderizada');
+  }, [dispatchLog])
+
+  const multiplyState = () => {
+    setNum((num) => num * 2);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {num}
+      <button onClick={multiplyState}>Multiply</button>
     </div>
   );
 }
